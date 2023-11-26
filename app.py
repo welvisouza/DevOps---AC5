@@ -1,17 +1,22 @@
 from flask import Flask, render_template
 import os
 
-python3 app = Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    index_path = os.path.join(current_directory, 'templates', 'index.html')
+    try:
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        
+        templates_directory = os.path.join(current_directory, 'templates')
+        index_path = os.path.join(templates_directory, 'index.html')
 
-    if os.path.exists(index_path):
-        return render_template('index.html')
-    else:
-        return "Erro: arquivo 'index.html' não encontrado."
+        if os.path.exists(index_path):
+            return render_template('index.html')
+        else:
+            return f"Erro: arquivo 'index.html' não encontrado. Verifique se o diretório 'templates' está configurado corretamente."
+    except Exception as e:
+        return f"Erro interno: {str(e)}"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
