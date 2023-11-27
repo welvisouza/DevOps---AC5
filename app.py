@@ -13,8 +13,7 @@ def hello_world():
 
         if os.path.exists(index_path):
             return render_template('index.html')
-        else:
-            return f"Erro: arquivo 'index.html' não encontrado. Verifique se o diretório 'templates' está configurado corretamente."
+      
     except Exception as e:
         return f"Erro interno: {str(e)}"
 
